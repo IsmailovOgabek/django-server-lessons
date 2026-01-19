@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*)n!aiuv51aqh$7o=t^unl@daqbq%yt*b9=8jyty=^r0dxo0*f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -112,7 +112,25 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
+from pathlib import Path
+import os
 
-STATIC_URL = 'static/'
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# --- STATIC FILES ---
+STATIC_URL = '/static/'
+
+# static/ papkasi loyihaning ildizida bo‘lsa:
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# collectstatic uchun (faqat productionda ishlatiladi)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# --- MEDIA FILES ---
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
